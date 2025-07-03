@@ -2,6 +2,10 @@
 - name: Ping remote host
   hosts: all
   gather_facts: no
+
+  vars:
+    web_root: /var/www/ansible-app
+
   tasks:
     - name: Ping the remote host
       ansible.builtin.ping:
