@@ -1,0 +1,3 @@
+web_root: /var/www/ansible-app
+env: development
+page_title: "Ansible Demo Page"

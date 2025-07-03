@@ -1,0 +1,34 @@
+---
+- name: Create a directory for the web root
+  ansible.builtin.file:
+    path: "{{ webserver_web_root }}"
+    state: directory
+    mode: '0755'
+
+- name: Update index.html via template
+  ansible.builtin.template:
+    src: "{{ webserver_src_path_index }}"
+    dest: "{{ webserver_web_root }}/index.html"
+    mode: '0644'
+  notify: Restart Nginx
+
+- name: Update nginx.conf via template
+  ansible.builtin.template:
+    src: "{{ webserver_src_path_nginx }}"
+    dest: /etc/nginx/conf.d/ansible-app.conf
+    mode: '0644'
+  notify: Restart Nginx
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Website access check
+  ansible.builtin.uri:
+    url: http://localhost/
+    return_content: true
+    status_code: 200
+  register: web_result
+
+- name: Print web result
+  ansible.builtin.debug:
+    var: web_result.content

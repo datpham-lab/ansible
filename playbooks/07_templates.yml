@@ -1,0 +1,21 @@
+---
+- name: Deploy dynamic Nginx configuration via templates
+  hosts: web
+  become: true
+
+  vars:
+    src_path: ../templates/nginx.conf.j2
+
+  tasks:
+    - name: Update a file nginx.conf via template
+      ansible.builtin.template:
+        src: "{{ src_path }}"
+        dest: /etc/nginx/conf.d/ansible-app.conf
+        mode: '0644'
+      notify: Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

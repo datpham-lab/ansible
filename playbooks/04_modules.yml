@@ -1,0 +1,46 @@
+---
+- name: Demo basic Ansible modules
+  hosts: web
+  become: true
+
+  vars:
+    src_path: ../files/index.html
+
+  tasks:
+    - name: Ping check connection
+      ansible.builtin.ping:
+
+    - name: Use module command
+      ansible.builtin.command:
+        cmd: hostname
+      changed_when: false
+
+    - name: Use module shell
+      ansible.builtin.command:
+        cmd: uptime
+      changed_when: false
+
+    - name: Create a directory
+      ansible.builtin.file:
+        path: /opt/ansible-demo
+        state: directory
+        mode: '0755'
+
+    - name: Copy file HTML demo
+      ansible.builtin.copy:
+        src: '{{ src_path }}'
+        dest: /opt/ansible-demo/index.html
+        mode: '0644'
+
+    - name: Install Nginx service
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Enable and start Nginx service
+      ansible.builtin.service:
+        name: nginx
+        enabled: true
+        state: started
+      when: ansible_os_family == 'Debian'

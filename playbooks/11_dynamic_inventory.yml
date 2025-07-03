@@ -1,0 +1,9 @@
+---
+- name: Group hosts dynamically by OS
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Phân nhóm host theo OS distribution
+      ansible.builtin.group_by:
+        key: "os_{{ ansible_facts['distribution'] | lower }}"

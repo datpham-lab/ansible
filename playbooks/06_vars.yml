@@ -1,0 +1,27 @@
+---
+- name: Demo for variables and facts
+  hosts: web
+  become: true
+
+  vars:
+    src_path: ../templates/index.html.j2
+
+  tasks:
+    - name: Create a directory web
+      ansible.builtin.file:
+        path: "{{ web_root }}"
+        state: directory
+        mode: '0755'
+
+    - name: Create dynamic index.html wwith variables and facts
+      ansible.builtin.template:
+        src: "{{ src_path }}"
+        dest: "{{ web_root }}/index.html"
+        mode: '0644'
+
+    - name: Show information about the web server
+      ansible.builtin.debug:
+        msg:
+          - "ENV: {{ env }}"
+          - "Page Title: {{ page_title }}"
+          - "OS Family: {{ ansible_os_family }}"

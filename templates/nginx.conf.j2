@@ -1,0 +1,25 @@
+server {
+    listen 80;
+    server_name localhost {{ inventory_hostname }};
+    root {{ web_root }};
+    index index.html;
+
+{% if env == 'production' %}
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+{% else %}
+    access_log off;
+    error_log /dev/null crit;
+{% endif %}
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+{% for ext in ['.php', '.cgi'] %}
+    location ~ \{{ ext }}$ {
+        return 404;
+    }
+    
+{% endfor %}
+}

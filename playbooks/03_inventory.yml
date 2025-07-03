@@ -1,0 +1,7 @@
+---
+- name: Check connectivity to Managed Node
+  hosts: web
+  gather_facts: false
+  tasks:
+    - name: Ping web servers
+      ansible.builtin.ping:

@@ -1,0 +1,10 @@
+---
+- name: Use roles to organize Playbook
+  hosts: web
+  become: true
+
+  vars:
+    roles_path: ../roles/webserver
+
+  roles:
+    - role: "{{ roles_path }}"
