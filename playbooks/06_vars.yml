@@ -1,6 +1,6 @@
 ---
 - name: Demo for variables and facts
-  hosts: web
+  hosts: all
   become: true
 
   vars:

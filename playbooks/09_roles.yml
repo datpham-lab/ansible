@@ -1,6 +1,6 @@
 ---
 - name: Use roles to organize Playbook
-  hosts: web
+  hosts: all
   become: true
 
   vars:

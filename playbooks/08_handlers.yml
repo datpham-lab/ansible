@@ -1,6 +1,6 @@
 ---
 - name: Use handlers to optimize Playbook
-  hosts: web
+  hosts: all
   become: true
 
   vars:

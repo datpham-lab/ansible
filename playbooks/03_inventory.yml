@@ -1,6 +1,6 @@
 ---
 - name: Check connectivity to Managed Node
-  hosts: web
+  hosts: all
   gather_facts: false
   tasks:
     - name: Ping web servers

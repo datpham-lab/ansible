@@ -1,6 +1,6 @@
 ---
 - name: Deploy dynamic Nginx configuration via templates
-  hosts: web
+  hosts: all
   become: true
 
   vars:

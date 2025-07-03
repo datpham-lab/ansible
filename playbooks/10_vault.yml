@@ -1,6 +1,6 @@
 ---
 - name: Demo authentication with Ansible Vault
-  hosts: web
+  hosts: all
   become: false
 
   vars_files:
