@@ -8,12 +8,18 @@ all:
     web:
       hosts:
         web-server:
-          ansible_host: 171.244.27.138
-          ansible_port: 25022
-          ansible_user: root
-          ansible_ssh_private_key_file: /working-dir/SSHKey/kube-key
+          ansible_host: #ip_address
+          ansible_port: #port_number
+          ansible_user: #username
+          ansible_ssh_private_key_file: #path_to_private_key
           ansible_python_interpreter: /usr/bin/python3
 
+      # Example:
+          # ansible_host: '192.168.1.12'
+          # ansible_port: '2222'
+          # ansible_user: 'root'
+          # ansible_ssh_private_key_file: '/SSHKey/private-key'
+          # ansible_python_interpreter: /usr/bin/python3
     backend:
       hosts:
         web-server:
